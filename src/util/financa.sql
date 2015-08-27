@@ -30,6 +30,31 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
+-- Table `financa`.`tipo_conta`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `financa`.`tipo_conta` (
+  `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
+  `tipo` VARCHAR(45) NOT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '')
+ENGINE = InnoDB
+AUTO_INCREMENT = 6
+DEFAULT CHARACTER SET = utf8;
+
+
+
+-- -----------------------------------------------------
+-- Table `financa`.`categoria`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `financa`.`categoria` (
+  `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
+  `nome` VARCHAR(25) NOT NULL COMMENT '',
+  `tipo_categoria` CHAR(1) NOT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '')
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
 -- Table `financa`.`usuario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `financa`.`usuario` (
@@ -74,18 +99,6 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `financa`.`categoria`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `financa`.`categoria` (
-  `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
-  `nome` VARCHAR(25) NOT NULL COMMENT '',
-  `tipo_categoria` CHAR(1) NOT NULL COMMENT '',
-  PRIMARY KEY (`id`)  COMMENT '')
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
 -- Table `financa`.`compras_cartao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `financa`.`compras_cartao` (
@@ -114,16 +127,6 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 
--- -----------------------------------------------------
--- Table `financa`.`tipo_conta`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `financa`.`tipo_conta` (
-  `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
-  `tipo` VARCHAR(45) NOT NULL COMMENT '',
-  PRIMARY KEY (`id`)  COMMENT '')
-ENGINE = InnoDB
-AUTO_INCREMENT = 6
-DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -211,3 +214,11 @@ DEFAULT CHARACTER SET = utf8;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+INSERT INTO `financa`.`bandeira` (`nome`) 
+VALUES ('Visa'),('MasterCard'),('Hipercard'),('American Express'),('Sorocred'),('Cartão BNDES'),('Dines Club'),('Outro Cartão');
+INSERT INTO `financa`.`tipo_conta` (`tipo`)
+ VALUES ('Conta Corrente'),('Dinheiro'),('Dinheiro'),('Poupança'),('Investimentos'),('Outros');
+INSERT INTO `financa`.`categoria` (`nome`, `tipo_categoria`)
+ VALUES ('Alimentação','D'),('Investimentos','R'),('Outros','R'),('Presente','D'),('Moradia','D'),('Saúde','D'),('Transporte','D'),('Salário','R');
