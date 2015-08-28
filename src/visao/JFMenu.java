@@ -11,6 +11,8 @@ import DAO.DespesaDAO;
 import DAO.ReceitaDAO;
 import java.awt.Color;
 import javax.swing.JLabel;
+ 
+
 /**
  *
  * @author takedown
@@ -43,7 +45,6 @@ public class JFMenu extends javax.swing.JFrame {
         initComponents();
         setCor(255, 255, 255);
         timer.start();
-        
     }
 
     private void setCor(int vermelho, int verde, int azul) {
@@ -94,6 +95,12 @@ public class JFMenu extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLUsuarioFinal = new javax.swing.JLabel();
         jLId = new javax.swing.JLabel();
+
+        timer.addTimerListener(new org.netbeans.examples.lib.timerbean.TimerListener() {
+            public void onTime(java.awt.event.ActionEvent evt) {
+                timerOnTime(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -197,11 +204,11 @@ public class JFMenu extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(0, 51, 204));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI Emoji", 0, 22)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Contas");
 
-        jLContas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLContas.setFont(new java.awt.Font("Segoe UI Emoji", 0, 22)); // NOI18N
         jLContas.setForeground(new java.awt.Color(255, 255, 255));
         jLContas.setText("00000,00");
         jLContas.setMaximumSize(new java.awt.Dimension(70, 25));
@@ -224,11 +231,11 @@ public class JFMenu extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 205, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLContas, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
+                .addComponent(jLContas, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,11 +256,11 @@ public class JFMenu extends javax.swing.JFrame {
 
         jPanel5.setBackground(new java.awt.Color(0, 204, 0));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI Emoji", 0, 22)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Receitas");
 
-        jLReceitas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLReceitas.setFont(new java.awt.Font("Segoe UI Emoji", 0, 22)); // NOI18N
         jLReceitas.setForeground(new java.awt.Color(255, 255, 255));
         jLReceitas.setText("00000,00");
         jLReceitas.setMaximumSize(new java.awt.Dimension(70, 25));
@@ -271,11 +278,11 @@ public class JFMenu extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLReceitas, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
+                .addComponent(jLReceitas, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -290,11 +297,11 @@ public class JFMenu extends javax.swing.JFrame {
 
         jPanel6.setBackground(new java.awt.Color(204, 0, 0));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI Emoji", 0, 22)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Despesas");
 
-        jLDespesas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLDespesas.setFont(new java.awt.Font("Segoe UI Emoji", 0, 22)); // NOI18N
         jLDespesas.setForeground(new java.awt.Color(255, 255, 255));
         jLDespesas.setText("00000,00");
         jLDespesas.setMaximumSize(new java.awt.Dimension(70, 25));
@@ -312,11 +319,11 @@ public class JFMenu extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 227, Short.MAX_VALUE)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLDespesas, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
+                .addComponent(jLDespesas, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -331,11 +338,11 @@ public class JFMenu extends javax.swing.JFrame {
 
         jPanel7.setBackground(new java.awt.Color(255, 204, 0));
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Segoe UI Emoji", 0, 22)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Cartão de Crédito");
 
-        jLCartoes.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLCartoes.setFont(new java.awt.Font("Segoe UI Emoji", 0, 22)); // NOI18N
         jLCartoes.setForeground(new java.awt.Color(255, 255, 255));
         jLCartoes.setText("00000,00");
         jLCartoes.setMaximumSize(new java.awt.Dimension(70, 25));
@@ -356,8 +363,8 @@ public class JFMenu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLCartoes, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
+                .addComponent(jLCartoes, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -397,7 +404,7 @@ public class JFMenu extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
                 .addComponent(jButton7)
                 .addGap(23, 23, 23))
         );
@@ -441,7 +448,7 @@ public class JFMenu extends javax.swing.JFrame {
                 .addComponent(jLId, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(jLUsuarioFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 334, Short.MAX_VALUE))
+                .addGap(0, 363, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -462,7 +469,7 @@ public class JFMenu extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 11, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -590,7 +597,6 @@ public class JFMenu extends javax.swing.JFrame {
         listaDespesas();
         listaCartoes();
         listaReceitas();
-        timer.stop();
 
     }
 
@@ -616,7 +622,7 @@ public class JFMenu extends javax.swing.JFrame {
         ReceitaDAO dao = new ReceitaDAO();
         double valor = dao.listaTotal(idUsuario);
         jLReceitas.setText(String.valueOf(valor));
-       
+        timer.stop();
     }
 
 }

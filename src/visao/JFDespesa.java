@@ -5,7 +5,10 @@
  */
 package visao;
 
+import DAO.CategoriaDAO;
 import java.awt.Color;
+import java.util.List;
+import modelo.Categoria;
 
 /**
  *
@@ -13,18 +16,21 @@ import java.awt.Color;
  */
 public class JFDespesa extends javax.swing.JFrame {
 
+     List<Categoria> despesas;
     /**
      * Creates new form JFDespesa
      */
     public JFDespesa() {
         initComponents();
-    setCor(255, 255, 255);
+        setCor(255, 255, 255);
+        listaDespesas();
     }
 
     private void setCor(int vermelho, int verde, int azul) {
         Color minhaCor = new Color(vermelho, verde, azul);
         getContentPane().setBackground(minhaCor);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,7 +48,6 @@ public class JFDespesa extends javax.swing.JFrame {
         jTFValor = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jTDescricao = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jCBCategoria = new javax.swing.JComboBox();
         jCBContas = new javax.swing.JComboBox();
@@ -105,17 +110,6 @@ public class JFDespesa extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setText("Descrição");
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/numeros/operadores.png"))); // NOI18N
-        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
-        jButton1.setPreferredSize(new java.awt.Dimension(40, 39));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setText("Data");
@@ -123,7 +117,6 @@ public class JFDespesa extends javax.swing.JFrame {
         jCBCategoria.setBackground(new java.awt.Color(255, 0, 0));
         jCBCategoria.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jCBCategoria.setForeground(new java.awt.Color(255, 255, 255));
-        jCBCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "CATEGORIA" }));
         jCBCategoria.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0), 4));
 
         jCBContas.setBackground(new java.awt.Color(255, 0, 0));
@@ -153,8 +146,7 @@ public class JFDespesa extends javax.swing.JFrame {
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel2)
                                     .addComponent(jTFValor))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(46, 46, 46))
                             .addComponent(jTDescricao)
                             .addComponent(jCBCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jCBContas, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -170,12 +162,9 @@ public class JFDespesa extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTFValor, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTFValor, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -229,11 +218,6 @@ public class JFDespesa extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        JFCalculadora c = new JFCalculadora();
-        c.show();// TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -272,7 +256,6 @@ public class JFDespesa extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCancelar;
     private javax.swing.JButton jBInserir;
-    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jCBCategoria;
     private javax.swing.JComboBox jCBContas;
     private javax.swing.JCheckBox jCBPago;
@@ -286,4 +269,13 @@ public class JFDespesa extends javax.swing.JFrame {
     private javax.swing.JTextField jTDescricao;
     private javax.swing.JTextField jTFValor;
     // End of variables declaration//GEN-END:variables
+
+    private void listaDespesas() {
+        CategoriaDAO dao = new CategoriaDAO();
+        despesas = dao.listaDespesas();
+        for (int i = 0; i < despesas.size(); i++) {
+            jCBCategoria.addItem(despesas.get(i).getNome());
+
+        }
+    }
 }

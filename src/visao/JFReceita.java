@@ -5,7 +5,11 @@
  */
 package visao;
 
+import DAO.CategoriaDAO;
+import DAO.ContaDAO;
 import java.awt.Color;
+import java.util.List;
+import modelo.Categoria;
 
 /**
  *
@@ -13,12 +17,15 @@ import java.awt.Color;
  */
 public class JFReceita extends javax.swing.JFrame {
 
+    List<Categoria> categorias;
     /**
      * Creates new form JFReceita
      */
     public JFReceita() {
         initComponents();
        setCor(255, 255, 255);
+       listarCategorias();
+       listContas();
     }
 
     private void setCor(int vermelho, int verde, int azul) {
@@ -43,7 +50,6 @@ public class JFReceita extends javax.swing.JFrame {
         jTFValor = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jTFDescricao = new javax.swing.JTextField();
-        jBCalculadora = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jCBCategoria = new javax.swing.JComboBox();
         jCContas = new javax.swing.JComboBox();
@@ -112,16 +118,6 @@ public class JFReceita extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("Descrição");
 
-        jBCalculadora.setBackground(new java.awt.Color(255, 255, 255));
-        jBCalculadora.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/numeros/operadores.png"))); // NOI18N
-        jBCalculadora.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
-        jBCalculadora.setPreferredSize(new java.awt.Dimension(40, 39));
-        jBCalculadora.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBCalculadoraActionPerformed(evt);
-            }
-        });
-
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
@@ -159,9 +155,7 @@ public class JFReceita extends javax.swing.JFrame {
                                 .addComponent(jLabel1)
                                 .addComponent(jLabel2)
                                 .addComponent(jTFValor))
-                            .addGap(18, 18, 18)
-                            .addComponent(jBCalculadora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(2, 2, 2))
+                            .addGap(60, 60, 60))
                         .addComponent(jTFDescricao)
                         .addComponent(jCBCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jCContas, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -174,12 +168,9 @@ public class JFReceita extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTFValor, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jBCalculadora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTFValor, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -231,11 +222,6 @@ public class JFReceita extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBCalculadoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCalculadoraActionPerformed
-        JFCalculadora c = new JFCalculadora();
-        c.show();// TODO add your handling code here:
-    }//GEN-LAST:event_jBCalculadoraActionPerformed
-
     private void jBInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBInserirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBInserirActionPerformed
@@ -277,7 +263,6 @@ public class JFReceita extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCalcelar;
-    private javax.swing.JButton jBCalculadora;
     private javax.swing.JButton jBInserir;
     private javax.swing.JComboBox jCBCategoria;
     private javax.swing.JCheckBox jCBRecebido;
@@ -292,4 +277,19 @@ public class JFReceita extends javax.swing.JFrame {
     private javax.swing.JTextField jTFDescricao;
     private javax.swing.JTextField jTFValor;
     // End of variables declaration//GEN-END:variables
+
+    private void listarCategorias() {
+        CategoriaDAO dao = new CategoriaDAO();
+        categorias = dao.listaReceitas();
+        jCBCategoria.removeAllItems();
+        for (int i = 0; i < categorias.size(); i++) {
+            jCBCategoria.addItem(categorias.get(i).getNome());
+            
+        }
+    }
+
+    private void listContas() {
+        ContaDAO dao = new ContaDAO();
+        
+    }
 }

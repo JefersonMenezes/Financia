@@ -16,6 +16,7 @@ public class Conta {
     private double saldoInicial;
     private int usuario;
     private int tipoConta;
+    private String tipoContaNome;
 
     public Conta() {
     }
@@ -58,6 +59,14 @@ public class Conta {
 
     public void setTipoConta(int tipoConta) {
         this.tipoConta = tipoConta;
+    }
+
+    public void setTipoContaNome(String string) {
+        this.tipoContaNome = string;
+    }
+    
+    public String getTipoContaNome() {
+        return tipoContaNome;
     }
     
     
