@@ -398,5 +398,7 @@ public class JFNovaConta extends javax.swing.JFrame {
         jLid.setText(String.valueOf(x));
         
     }
+
+    
     
 }

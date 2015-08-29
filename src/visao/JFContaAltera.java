@@ -5,43 +5,30 @@
  */
 package visao;
 
+import DAO.ContaDAO;
+import DAO.TipoContaDAO;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import modelo.Conta;
+import modelo.TipoConta;
 
 /**
  *
  * @author takedown
  */
 public class JFContaAltera extends javax.swing.JFrame {
-    
-    public JTextField getjTFCodigo() {
-        return jTFCodigo;
-    }
-    
-    public void setjTFCodigo(JTextField jTFCodigo) {
-        this.jTFCodigo = jTFCodigo;
-    }
-    
-    public JTextField getjTFSaldo() {
-        return jTFSaldo;
-    }
-    
-    public void setjTFSaldo(JTextField jTFSaldo) {
-        this.jTFSaldo = jTFSaldo;
-    }
-    
-    public JTextField getjTFTitulo() {
-        return jTFTitulo;
-    }
-    
-    public void setjTFTitulo(JTextField jTFTitulo) {
-        this.jTFTitulo = jTFTitulo;
-    }
+
+    JFContas contas;
+    List<TipoConta> tiposConta;
+
 
     /**
      * Creates new form JFContaAltera
      */
     public JFContaAltera() {
         initComponents();
+        listaTiposContas();
     }
 
     /**
@@ -79,7 +66,7 @@ public class JFContaAltera extends javax.swing.JFrame {
             .addGap(0, 49, Short.MAX_VALUE)
         );
 
-        jCTiposContas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCTiposContas.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         jLabel1.setText("Codigo");
 
@@ -130,8 +117,18 @@ public class JFContaAltera extends javax.swing.JFrame {
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jTFCodigo, jTFSaldo, jTFTitulo});
 
         jButton1.setText("ALTERAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("CANCELAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -188,6 +185,24 @@ public class JFContaAltera extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (verificaCampos()) {
+            alteraConta();
+            JOptionPane.showMessageDialog(rootPane, "Conta alterada com sucesso-1-!");
+            atualizaContas();
+            this.dispose();
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+        }
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -237,11 +252,62 @@ public class JFContaAltera extends javax.swing.JFrame {
     private javax.swing.JTextField jTFSaldo;
     private javax.swing.JTextField jTFTitulo;
     // End of variables declaration//GEN-END:variables
-    
+
     public void recebeDados(int id, String titulo, double saldo) {
         jTFCodigo.setText(String.valueOf(id));
         jTFTitulo.setText(titulo);
         jTFSaldo.setText(String.valueOf(saldo));
+
+    }
+
+    private void listaTiposContas() {
+        TipoContaDAO dao = new TipoContaDAO();
+        tiposConta = dao.listar();
+        for (int i = 0; i < tiposConta.size(); i++) {
+            jCTiposContas.addItem(tiposConta.get(i).getTipo());
+
+        }
+
+    }
+
+    private void alteraConta() {
+        Conta conta = new Conta();
+        conta.setId(Integer.valueOf(jTFCodigo.getText()));
+        conta.setNome(jTFTitulo.getText());
+        conta.setSaldoInicial(Double.valueOf(jTFSaldo.getText()));
+        conta.setTipoConta(escolheContaPorNome());
         
+        ContaDAO dao = new ContaDAO();
+        dao.altera(conta);
+    }
+
+    private boolean verificaCampos() {
+        boolean retorno = false;
+        if (!jTFCodigo.getText().equals("") && !jTFSaldo.getText().equals("") && !jTFTitulo.getText().equals("")) {
+            retorno = true;
+        } else {
+            retorno = false;
+        }
+        return retorno;
+    }
+
+    private int escolheContaPorNome() {
+        int retorno = 0;
+        for (int i = 0; i < tiposConta.size(); i++) {
+            if (tiposConta.get(i).getTipo().equals(jCTiposContas.getSelectedItem())) {
+                retorno = tiposConta.get(i).getId();
+            }
+        }
+        return retorno;
+    }
+
+    private void atualizaContas() {
+        if (this.contas == null) {
+            this.contas = new JFContas();
+            this.contas.show();
+        } else {
+            this.contas.show();
+            this.contas.setState(JFContaAltera.NORMAL);
+        }
     }
 }

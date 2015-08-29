@@ -26,13 +26,13 @@ public class JFContas extends javax.swing.JFrame {
     List<Conta> contas;
     ListSelectionModel lsmContas;
     DefaultTableModel tmContas = new DefaultTableModel(null, new String[]{"Código", "Título", "Saldo Atual", "Tipo de Conta"});
+    private int idUsuario;
 
     /**
      * Creates new form JFContas
      */
     public JFContas() {
         initComponents();
-        listaContas();
     }
 
     /**
@@ -47,6 +47,7 @@ public class JFContas extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLId = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -59,13 +60,22 @@ public class JFContas extends javax.swing.JFrame {
         jLabel1.setText("Agosto");
 
         jButton1.setText("NOVO");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLId.setText("Id");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jLId)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(162, 162, 162)
                 .addComponent(jButton1)
@@ -77,7 +87,8 @@ public class JFContas extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLId))
                 .addGap(19, 19, 19))
         );
 
@@ -151,6 +162,12 @@ public class JFContas extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        JFNovaConta conta = new JFNovaConta();
+        conta.show();
+        conta.setIdUsuario(this.idUsuario);// TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -188,6 +205,7 @@ public class JFContas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLId;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -199,7 +217,7 @@ public class JFContas extends javax.swing.JFrame {
 
     private void listaContas() {
         ContaDAO dao = new ContaDAO();
-        contas = dao.listaContasTipo(4);
+        contas = dao.listaContasTipo(this.idUsuario);
         mostraPesquisa();
     }
 
@@ -245,6 +263,12 @@ public class JFContas extends javax.swing.JFrame {
 
     private void limpaCampos() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setUsuario(int id) {
+        this.idUsuario = id;
+        jLId.setText(String.valueOf(this.idUsuario));
+        listaContas();
     }
 
 }

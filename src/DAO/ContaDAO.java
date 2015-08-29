@@ -64,8 +64,7 @@ public class ContaDAO {
     }
 
     public List<Conta> listaContasTipo(int i) {
-        String sql = "SELECT conta.id, conta.nome, conta.saldo_inicial, tipo_conta.tipo FROM financa.conta \n"
-                + "JOIN financa.tipo_conta ON conta.tipo_conta_id = tipo_conta.id WHERE usuario_id = ?";
+        String sql = "SELECT conta.id, conta.nome, conta.saldo_inicial, tipo_conta.tipo FROM financa.conta JOIN financa.tipo_conta ON conta.tipo_conta_id = tipo_conta.id WHERE usuario_id = ?";
         try {
             List<Conta> contas = new ArrayList<Conta>();
             PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -86,6 +85,23 @@ public class ContaDAO {
             stmt.close();
             return contas;
 
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    public void altera(Conta conta) {
+        String sql = "UPDATE conta SET nome = ?, saldo_inicial = ?, tipo_conta_id = ? WHERE id = ?";
+        try {
+            PreparedStatement stmt = conexao.prepareStatement(sql);
+            
+            stmt.setString(1, conta.getNome());
+            stmt.setDouble(2, conta.getSaldoInicial());
+            stmt.setInt(3, conta.getTipoConta());
+            stmt.setInt(4, conta.getId());
+
+            stmt.execute();
+            stmt.close();
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
