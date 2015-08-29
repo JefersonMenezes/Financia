@@ -193,7 +193,6 @@ public class JFContaAltera extends javax.swing.JFrame {
         if (verificaCampos()) {
             alteraConta();
             JOptionPane.showMessageDialog(rootPane, "Conta alterada com sucesso-1-!");
-            atualizaContas();
             this.dispose();
 
         } else {
@@ -301,13 +300,4 @@ public class JFContaAltera extends javax.swing.JFrame {
         return retorno;
     }
 
-    private void atualizaContas() {
-        if (this.contas == null) {
-            this.contas = new JFContas();
-            this.contas.show();
-        } else {
-            this.contas.show();
-            this.contas.setState(JFContaAltera.NORMAL);
-        }
-    }
 }
