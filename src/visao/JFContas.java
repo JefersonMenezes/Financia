@@ -6,6 +6,7 @@
 package visao;
 
 import DAO.ContaDAO;
+import java.awt.Color;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -33,6 +34,12 @@ public class JFContas extends javax.swing.JFrame {
      */
     public JFContas() {
         initComponents();
+    setCor(255, 255, 255);
+    }
+
+    private void setCor(int vermelho, int verde, int azul) {
+        Color minhaCor = new Color(vermelho, verde, azul);
+        getContentPane().setBackground(minhaCor);
     }
 
     /**
@@ -57,16 +64,20 @@ public class JFContas extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(0, 51, 255));
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Agosto");
 
-        jButton1.setText("NOVO");
+        jButton1.setText("NOVA");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
+        jLId.setForeground(new java.awt.Color(255, 255, 255));
         jLId.setText("Id");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -93,10 +104,14 @@ public class JFContas extends javax.swing.JFrame {
                 .addGap(19, 19, 19))
         );
 
+        jPanel2.setBackground(new java.awt.Color(0, 51, 204));
+
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Total");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("R$000000000");
 
         jButton2.setBackground(new java.awt.Color(0, 0, 204));
@@ -134,7 +149,7 @@ public class JFContas extends javax.swing.JFrame {
         jTContas.setForeground(new java.awt.Color(0, 51, 204));
         jTContas.setModel(tmContas);
         jTContas.setGridColor(new java.awt.Color(255, 204, 0));
-        jTContas.setSelectionBackground(new java.awt.Color(0, 153, 51));
+        jTContas.setSelectionBackground(new java.awt.Color(0, 102, 255));
         jTContas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         lsmContas = jTContas.getSelectionModel();
         lsmContas.addListSelectionListener(new ListSelectionListener(){
@@ -154,7 +169,7 @@ public class JFContas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );

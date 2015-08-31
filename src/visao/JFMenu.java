@@ -11,29 +11,28 @@ import DAO.DespesaDAO;
 import DAO.ReceitaDAO;
 import java.awt.Color;
 import javax.swing.JLabel;
- 
 
 /**
  *
  * @author takedown
  */
 public class JFMenu extends javax.swing.JFrame {
-
+    
     private String usuarioFinal;
     private int idUsuario;
-
+    
     public int getIdUsuario() {
         return idUsuario;
     }
-
+    
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
-
+    
     public JLabel getjLUsuarioFinal() {
         return jLUsuarioFinal;
     }
-
+    
     public void setjLUsuarioFinal(JLabel jLUsuarioFinal) {
         this.jLUsuarioFinal = jLUsuarioFinal;
     }
@@ -46,7 +45,7 @@ public class JFMenu extends javax.swing.JFrame {
         setCor(255, 255, 255);
         timer.start();
     }
-
+    
     private void setCor(int vermelho, int verde, int azul) {
         Color minhaCor = new Color(vermelho, verde, azul);
         getContentPane().setBackground(minhaCor);
@@ -117,6 +116,11 @@ public class JFMenu extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setToolTipText("Informações de cartões e inclusão");
         jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setToolTipText("Informações das contas e inclusões");
@@ -529,9 +533,9 @@ public class JFMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    JFContas conta = new JFContas();
-    conta.show();
-    conta.setUsuario(idUsuario);
+        JFContas conta = new JFContas();
+        conta.show();
+        conta.setUsuario(idUsuario);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void timerOnTime(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timerOnTime
@@ -546,6 +550,12 @@ public class JFMenu extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         listaSomas();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        JFCartoes cartoes = new JFCartoes();
+        cartoes.show();
+        cartoes.setUsuario(this.idUsuario);// TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -626,43 +636,43 @@ public class JFMenu extends javax.swing.JFrame {
         this.usuarioFinal = x;
         jLUsuarioFinal.setText(this.usuarioFinal);
     }
-
+    
     void setIdFinal(int x) {
         this.idUsuario = x;
         jLId.setText(String.valueOf(x));
     }
-
+    
     private void listaSomas() {
         listaContas();
         listaDespesas();
         listaCartoes();
         listaReceitas();
-
+        
     }
-
+    
     private void listaContas() {
         ContaDAO dao = new ContaDAO();
         double valor = dao.listaContas(idUsuario);
         jLContas.setText(String.valueOf(valor));
     }
-
+    
     private void listaDespesas() {
         DespesaDAO dao = new DespesaDAO();
         double valor = dao.listaTotal(idUsuario);
         jLDespesas.setText(String.valueOf(valor));
     }
-
+    
     private void listaCartoes() {
         ComprasCartaoDAO dao = new ComprasCartaoDAO();
         double valor = dao.listarTotal(idUsuario);
         jLCartoes.setText(String.valueOf(valor));
     }
-
+    
     private void listaReceitas() {
         ReceitaDAO dao = new ReceitaDAO();
         double valor = dao.listaTotal(idUsuario);
         jLReceitas.setText(String.valueOf(valor));
         timer.stop();
     }
-
+    
 }

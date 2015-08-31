@@ -115,7 +115,6 @@ public class JFCompraCartao extends javax.swing.JFrame {
         jLabel2.setText("Descrição");
 
         jBCalculadora.setBackground(new java.awt.Color(255, 255, 255));
-        jBCalculadora.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/numeros/operadores.png"))); // NOI18N
         jBCalculadora.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
         jBCalculadora.setPreferredSize(new java.awt.Dimension(40, 39));
         jBCalculadora.addActionListener(new java.awt.event.ActionListener() {
@@ -184,10 +183,10 @@ public class JFCompraCartao extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(14, 14, 14)
                                 .addComponent(jLabel6)
-                                .addGap(24, 24, 24)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextField1))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

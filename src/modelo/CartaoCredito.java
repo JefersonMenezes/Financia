@@ -18,6 +18,7 @@ public class CartaoCredito {
     private int diaVencimento;
     private int usuario;
     private int bandeira;
+    private String bandeiraNome;
 
     public CartaoCredito() {
     }
@@ -76,6 +77,14 @@ public class CartaoCredito {
 
     public void setBandeira(int bandeira) {
         this.bandeira = bandeira;
+    }
+
+    public void setBandeiraNome(String string) {
+        this.bandeiraNome = string;
+    }
+    
+    public String getBandeiraNome(){
+        return this.bandeiraNome;
     }
     
     
