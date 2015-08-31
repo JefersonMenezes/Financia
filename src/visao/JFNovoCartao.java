@@ -22,7 +22,6 @@ public class JFNovoCartao extends javax.swing.JFrame {
 
     List<Bandeira> bandeiras;
     private int inUsuario;
-    private Object idUsuario;
 
     /**
      * Creates new form JFCartao
@@ -30,8 +29,7 @@ public class JFNovoCartao extends javax.swing.JFrame {
     public JFNovoCartao() {
         initComponents();
         listaBandeiras();
-        setIdUsuario();
-    setCor(255, 255, 255);
+        setCor(255, 255, 255);
     }
 
     private void setCor(int vermelho, int verde, int azul) {
@@ -353,7 +351,6 @@ public class JFNovoCartao extends javax.swing.JFrame {
     private double formataValorDouble() {
         String sv = jTFLimite.getText();
         String vsf = sv.replace("R$", "").replace(" ", "").replace(".", "").replace(",", ".");
-        
 
         double retorno = Double.valueOf(vsf);
         System.out.println("Formata valor double: " + vsf);
@@ -373,10 +370,10 @@ public class JFNovoCartao extends javax.swing.JFrame {
         System.out.println("Formata Valor BR: " + valorFormatado);
         return valorFormatado;
     }
-    
-    private void setIdUsuario(){
-        JFMenu menu = new JFMenu();
-        this.inUsuario = menu.getIdUsuario();
-        jLID.setText(String.valueOf(this.idUsuario));
+
+    public void setIdUsuario(int usuario) {
+        this.inUsuario = usuario;
+        jLID.setText(String.valueOf(this.inUsuario));
     }
+
 }

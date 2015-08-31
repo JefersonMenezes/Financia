@@ -122,6 +122,7 @@ public class JFCartoes extends javax.swing.JFrame {
 
         jTCartoes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTCartoes.setModel(tmCartoes);
+        jTCartoes.setGridColor(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(jTCartoes);
 
         jPanel2.setBackground(new java.awt.Color(0, 150, 136));
@@ -170,8 +171,8 @@ public class JFCartoes extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -181,7 +182,10 @@ public class JFCartoes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        JFNovoCartao cartao = new JFNovoCartao();
+        cartao.show();
+        cartao.setIdUsuario(this.idUsuario);
+        this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -254,23 +258,29 @@ public class JFCartoes extends javax.swing.JFrame {
                 tmCartoes.addRow(linha);
                 tmCartoes.setValueAt(cartoes.get(i).getDescricao(), i, 0);
                 tmCartoes.setValueAt("Fatura Aberta", i, 1);
-                
                 tmCartoes.setValueAt(cartoes.get(i).getDiaVencimento(), i, 2);
-                tmCartoes.setValueAt(despesasAPagar(), i, 2);
-                
+                tmCartoes.setValueAt(despesasAPagarPorCartao(idUsuario, cartoes.get(i).getId()), i, 3);
+                tmCartoes.setValueAt(cartoes.get(i).getLimite() - despesasAPagarPorCartao(idUsuario, cartoes.get(i).getId()), i, 4);
+
             }
         }
     }
-    
-    private double mostraRestoLimite(){
+
+    private double mostraRestoLimite() {
         for (int i = 0; i < cartoes.size(); i++) {
             cartoes.get(i).getLimite();
-            
+
         }
         return 0;
     }
 
-    private double despesasAPagar() {
+    private double despesasAPagarPorCartao(int usuario, int cartao) {
+        CartaoCreditoDAO dao = new CartaoCreditoDAO();
+        double retorno = dao.despesasPorCartao(this.idUsuario, cartao);
+        return retorno;
+    }
+
+    private double totalDespesasAPagar() {
         CartaoCreditoDAO dao = new CartaoCreditoDAO();
         double retorno = dao.totalDespesas(this.idUsuario);
         return retorno;

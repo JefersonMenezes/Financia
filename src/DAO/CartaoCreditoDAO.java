@@ -99,4 +99,23 @@ public class CartaoCreditoDAO {
 
     }
 
+    public double despesasPorCartao(int idUsuario, int cartao) {
+        String sql = "SELECT sum(valor) FROM financa.compras_cartao JOIN financa.cartao_credito ON cartao_credito.id = compras_cartao.cartao_credito_id  where usuario_id = ? and cartao_credito.id=?";
+        try {
+            double retorno = 0;
+            PreparedStatement stmt = conexao.prepareStatement(sql);
+            stmt.setInt(1, idUsuario);
+            stmt.setInt(1, cartao);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                retorno = rs.getDouble("sum(valor)");
+            }
+            rs.close();
+            stmt.close();
+            return retorno;
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
 }
